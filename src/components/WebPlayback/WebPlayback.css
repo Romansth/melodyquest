@@ -1,0 +1,97 @@
+body {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  background-color: #f0f0f0;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  background-color: #fff3e6;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  margin: auto;
+}
+
+.main-wrapper {
+  text-align: center;
+}
+
+h1 {
+  color: #ff4500;
+  text-shadow: 2px 2px #ffa07a;
+  margin-bottom: 20px;
+}
+
+.guess-timer,
+.now-playing__side {
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  width: 70%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #ffa07a;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #ffeb3b;
+  border: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #ffc107;
+  transform: scale(1.1);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  background-color: #ff9800;
+  transform: scale(1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:focus {
+  outline: none;
+}
+
+.correct-guess,
+.incorrect-guess {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.correct-guess {
+  color: green;
+}
+
+.incorrect-guess {
+  color: red;
+}
+
+#current-track {
+  margin-top: 20px;
+  font-size: 1.1em;
+  color: #555;
+}
+
+@media (max-width: 600px) {
+  input[type="text"] {
+    width: 100%;
+  }
+}

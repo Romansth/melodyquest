@@ -1,0 +1,86 @@
+body {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  background-color: #f0f0f0;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fff3e6;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  font-size: 3em;
+  margin-bottom: 40px;
+  color: #ff4500;
+  text-shadow: 2px 2px #ffa07a;
+}
+
+.login-button {
+  width: 250px;
+  padding: 15px 20px;
+  margin: 15px 0;
+  font-size: 1.5em;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+}
+
+.guest-login {
+  background-color: #ff8c00; /* Bright orange */
+  color: white;
+}
+
+.guest-login:hover {
+  background-color: #e67e22; /* Slightly darker orange */
+  transform: scale(1.1);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.spotify-login {
+  background-color: #1db954;
+  color: white;
+}
+
+.spotify-login:hover {
+  background-color: #14833b;
+  transform: scale(1.1);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.login-button:active {
+  transform: scale(1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-button:focus {
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 2.5em;
+  }
+
+  .login-button {
+    font-size: 1.2em;
+    padding: 10px 20px;
+  }
+}

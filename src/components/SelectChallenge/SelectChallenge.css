@@ -1,0 +1,68 @@
+body {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  background-color: #f0f0f0;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#select-challenge {
+  text-align: center;
+  background-color: #fff3e6;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 700px;
+  margin: auto;
+}
+
+.challenge-title {
+  font-size: 2.5em;
+  color: #ff4500;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px #ffa07a;
+}
+
+.challenge-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.challenge {
+  background-color: #ffeb3b;
+  border: none;
+  border-radius: 15px;
+  padding: 15px 30px;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+
+.challenge:hover {
+  background-color: #ffc107;
+  transform: scale(1.1);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.challenge:active {
+  background-color: #ff9800;
+  transform: scale(1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.challenge:focus {
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  .challenge {
+    font-size: 1.2em;
+    padding: 10px 20px;
+  }
+}
