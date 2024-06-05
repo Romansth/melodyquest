@@ -4,6 +4,8 @@ import SelectChallenge from "./SelectChallenge/SelectChallenge";
 import "./App.css";
 import Login from "./Login/Login";
 import ChoosePlayType from "./ChoosePlayType/ChoosePlayType";
+import Multiplayer from "./Multiplayer/Multiplayer";
+import Header from "./Shared/Header";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -12,30 +14,33 @@ function App() {
   const [token, setToken] = useState("");
   const [isSinglePlayer, setIsSinglePlayer] = useState(false);
   const [isMultiplayer, setIsMultiplayer] = useState(false);
+  const serverUrl = process.env.REACT_APP_SERVER_URL; // Server URL from environment variables
 
+  // useEffect to handle login state and token refresh
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const accessToken = params.get("access_token");
 
     if (accessToken) {
-      setToken(accessToken);
-      setLoggedIn(true);
+      setToken(accessToken); // Set token from URL parameter
+      setLoggedIn(true); 
     } else {
-      refreshAccessToken();
+      refreshAccessToken(); // Refresh token if not found
     }
 
-    // Automatically refresh the token periodically
-    const interval = setInterval(refreshAccessToken, 3600 * 1000); // Refresh every hour
-    return () => clearInterval(interval);
+    // Set up interval to refresh token periodically
+    const interval = setInterval(refreshAccessToken, 3600 * 1000);
+    return () => clearInterval(interval); // Clean up interval on component unmount
   }, []);
 
+  // Function to refresh the access token
   const refreshAccessToken = async () => {
     try {
-      const response = await fetch("http://localhost:5030/refresh_token");
+      const response = await fetch(`${serverUrl}/refresh_token`);
       const data = await response.json();
       if (data.access_token) {
-        setToken(data.access_token);
-        setLoggedIn(true);
+        setToken(data.access_token); 
+        setLoggedIn(true); 
       } else {
         console.error("Failed to refresh access token");
       }
@@ -44,56 +49,56 @@ function App() {
     }
   };
 
-  const handleGuestLogin = () => {
-    window.location.href = "http://localhost:5030/auth/login";
-  };
-
+  // Function to handle Spotify login
   const handleSpotifyLogin = () => {
-    window.location.href = "http://localhost:5030/auth/login";
+    window.location.href = `${serverUrl}/auth/login`; // Redirect to Spotify login
   };
 
-  const handlePlaylistSelect = (playlistUri) => {
-    setSelectedPlaylist(playlistUri);
-    setStart(true);
+  // Function to handle playlist selection
+  const handlePlaylistSelect = (singerId) => {
+    setSelectedPlaylist(singerId); 
+    setStart(true); 
   };
 
+  // Function to handle restart action
   const handleRestart = () => {
-    setStart(false);
-    setSelectedPlaylist(null);
+    setStart(false); 
+    setSelectedPlaylist(null); 
   };
 
+  // Function to handle token setting
   const handleTokenSet = (newToken) => {
-    setToken(newToken);
+    setToken(newToken); 
   };
 
+  // Function to handle single player mode selection
   const handleSinglePlayer = () => {
-    setIsSinglePlayer(true);
+    setIsSinglePlayer(true); // Set single player state to true
   };
 
+  // Function to handle multiplayer mode selection
   const handleMultiPlayer = () => {
-    setIsMultiplayer(true);
+    setIsMultiplayer(true); 
   };
 
   return (
-    <div className="app-container">
+    <div className="container">
+      <Header />
+      <div className="horizontal-line"></div>
+
+      {/* Render login component if not logged in */}
       {!loggedIn && (
         <div>
-          <Login
-            onGuestLogin={handleGuestLogin}
-            onSpotifyLogin={handleSpotifyLogin}
-          />
+          <Login onSpotifyLogin={handleSpotifyLogin} />
         </div>
       )}
 
+      {/* Render playlist selection component if logged in and not started */}
       {loggedIn && !start && (
-        <div>
-          <h1 className="title">Guess the Song Challenge</h1>
-          <div className="start-button-container">
-            <SelectChallenge onPlaylistSelect={handlePlaylistSelect} />
-          </div>
-        </div>
+        <SelectChallenge onPlaylistSelect={handlePlaylistSelect} />
       )}
 
+      {/* Render play type selection if logged in, started, and no play type selected */}
       {loggedIn && start && !isSinglePlayer && !isMultiplayer && (
         <div>
           <ChoosePlayType
@@ -103,6 +108,17 @@ function App() {
         </div>
       )}
 
+      {/* Render multiplayer component if in multiplayer mode */}
+      {isMultiplayer && loggedIn && start && (
+        <div>
+          <Multiplayer
+            selectedPlaylist={selectedPlaylist}
+            onRestart={handleRestart}
+          />
+        </div>
+      )}
+
+      {/* Render single player component if in single player mode */}
       {isSinglePlayer && loggedIn && start && (
         <WebPlayback
           selectedPlaylist={selectedPlaylist}
