@@ -4,18 +4,29 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
+    "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.7.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "ffmpeg-static": "^5.2.0",
+    "fluent-ffmpeg": "^2.1.3",
+    "lyrics-dumper": "^1.0.0",
+    "pg": "^8.11.5",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-scripts": "5.0.1",
+    "request": "^2.88.2",
+    "simple-peer": "^9.11.1",
+    "socket.io": "^4.5.3",
+    "socket.io-client": "^4.7.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "PORT=3050 react-scripts start",
+    "start": "PORT=3052 react-scripts start",
     "build": "react-scripts build",
-    "server": "node server",
+    "server": "node server/server.js",
     "dev": "run-p server start"
   },
   "eslintConfig": {
@@ -37,9 +48,6 @@
     ]
   },
   "devDependencies": {
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "npm-run-all": "^4.1.5",
-    "request": "^2.88.2"
+    "npm-run-all": "^4.1.5"
   }
 }

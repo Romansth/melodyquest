@@ -1,86 +1,125 @@
-body {
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
-  background-color: #f0f0f0;
-  margin: 0;
-  height: 100vh;
+.login-content {
   display: flex;
-  align-items: center;
+  flex: 1;
   justify-content: center;
+  gap: 5px;
 }
 
-.start-page {
+.round-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #fff3e6;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 700px;
-  margin: auto;
+  width: 20%;
+  padding: 20px;
+  color: #ffffff;
+  gap: 5px;
+}
+
+.round {
+  font-size: 1.5em;
+  font-family: "Kodchasan", sans-serif;
+  background-color: #7a83b6;
+  margin-bottom: 20px;
+  padding: 10px;
   text-align: center;
 }
 
-.title {
-  font-size: 3em;
-  margin-bottom: 40px;
-  color: #ff4500;
-  text-shadow: 2px 2px #ffa07a;
+.players {
+  background-color: #7a83b6;
+  padding: 10px;
+  flex-grow: 1;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
-.login-button {
-  width: 250px;
-  padding: 15px 20px;
-  margin: 15px 0;
+.players p {
+  font-family: "Judson", sans-serif;
+  margin: 5px 0;
   font-size: 1.5em;
+}
+
+.score {
+  display: flex;
+  justify-content: space-around;
+  font-family: "Kodchasan", sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.lyrics-section-login {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 50%;
+  gap: 5px;
+  padding: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.playing-now-login {
+  background-color: #7a83b6;
+  font-family: "Judson", sans-serif;
+  font-size: 3em;
+  margin-bottom: 20px;
+  flex-grow: 1;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.init-btn button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #ffffff;
+  color: #7a83b6;
+  font-family: "Kodchasan", sans-serif;
   border: none;
-  border-radius: 15px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s;
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.guest-login {
-  background-color: #ff8c00; /* Bright orange */
-  color: white;
+.init-btn button:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.guest-login:hover {
-  background-color: #e67e22; /* Slightly darker orange */
-  transform: scale(1.1);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.spotify-login {
-  background-color: #1db954;
-  color: white;
+.login-vinyl {
+  animation: spin 2s linear infinite;
 }
 
-.spotify-login:hover {
-  background-color: #14833b;
-  transform: scale(1.1);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-}
-
-.login-button:active {
-  transform: scale(1);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.login-button:focus {
-  outline: none;
-}
-
-@media (max-width: 600px) {
-  .title {
-    font-size: 2.5em;
+@media (max-width: 500px) {
+  .content {
+    flex-direction: column;
   }
 
-  .login-button {
-    font-size: 1.2em;
-    padding: 10px 20px;
+  .round-info,
+  .lyrics-section,
+  .guesses {
+    width: 100%;
+  }
+
+  .lyrics {
+    flex-grow: 0;
   }
 }

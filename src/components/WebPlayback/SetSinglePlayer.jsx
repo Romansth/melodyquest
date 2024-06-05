@@ -1,17 +1,22 @@
-import React from "react";
-import "./SelectChallenge.css";
+import React, { useState } from "react";
+import "./SetSinglePlayer.css";
 
-const SelectChallenge = ({ onPlaylistSelect }) => {
+const SetSinglePlayer = ({ onSubmit }) => {
+  const [name, setName] = useState("");
 
-  //Function to handle challenge select and pass it to parent compontent
-  const handleSelect = (singerId) => {
-    onPlaylistSelect(singerId);
+  // Function to handle form submission
+  const handleSubmit = () => {
+    if (name.trim()) {
+      onSubmit({ name });
+    } else {
+      console.error("No name entered!")
+    }
   };
 
   return (
-    <div class="challenge-section">
-      <div class="sub-header">
-        <span class="superscript-svg">
+    <div className="playtype-section">
+      <div className="sub-header">
+        <span className="superscript-svg">
           <svg
             width="26"
             height="67"
@@ -27,8 +32,8 @@ const SelectChallenge = ({ onPlaylistSelect }) => {
             />
           </svg>
         </span>
-        <span class="remaining-text">Select a Challenge</span>
-        <span class="superscript-svg">
+        <span className="remaining-text">Enter player details</span>
+        <span className="superscript-svg">
           <svg
             width="26"
             height="67"
@@ -45,75 +50,20 @@ const SelectChallenge = ({ onPlaylistSelect }) => {
           </svg>
         </span>
       </div>
-      <div class="challenges-flex">
-        <div class="challenges">
-          <button
-            className="challenge-title"
-            id="tiktok-hits"
-            onClick={() => handleSelect("tiktok-hits")}
-          >
-            Tiktok hits
-          </button>
-          <button
-            className="challenge-title"
-            id="pop-songs"
-            onClick={() => handleSelect("pop-songs")}
-          >
-            Pop songs
-          </button>
-          <button
-            className="challenge-title"
-            id="indie-songs"
-            onClick={() => handleSelect("indie-songs")}
-          >
-            Indie songs
-          </button>
-          <button
-            className="challenge-title"
-            id="rap-songs"
-            onClick={() => handleSelect("rap-songs")}
-          >
-            Rap songs
-          </button>
-          <button
-            className="challenge-title"
-            id="movies-shows-musicals"
-            onClick={() => handleSelect("movies-shows-musicals")}
-          >
-            Movies and shows
-          </button>
-          <button
-            className="challenge-title"
-            id="ed-shreeran"
-            onClick={() => handleSelect("ed-sheeran")}
-          >
-            Ed Sheeran
-          </button>
-          <button
-            className="challenge-title"
-            id="taylor-swift"
-            onClick={() => handleSelect("taylor-swift")}
-          >
-            Taylor Swift
-          </button>
-          <button
-            className="challenge-title"
-            id="olivia-rodrigo"
-            onClick={() => handleSelect("olivia-rodrigo")}
-          >
-            Olivia Rodrigo
-          </button>
-          <button
-            className="challenge-title"
-            id="justin-bieber"
-            onClick={() => handleSelect("justin-bieber")}
-          >
-            Justin Beiber
-          </button>
+      <div className="playtype-flex">
+        <div className="room-input">
+          <input
+            type="text"
+            placeholder="User Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="input-field"
+          />
+          <button onClick={handleSubmit}>Start Game</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default SelectChallenge;
+export default SetSinglePlayer;
