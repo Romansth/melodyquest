@@ -6,15 +6,50 @@ const token = process.env.SPOTIFY_TOKEN;
 const delayInMillis = 1000; // Delay between API requests in milliseconds
 
 const playlists = {
-  "pop-songs": "2xutOn4Ea4RyjuaRaD3jl3",
-  "indie-songs": "2NJeVNAWQYH4rvFFKMNguu",
+  "pop-songs": "5nYj43JXdyVx0yAtY5OVFP",
+  "indie-songs": "30QV4edB1roGt1FnTNxqy1",
   "rap-songs": "5rsl9NqgQnTQn5kUMGKopO",
-  "tiktok-hits": "3i2pjPvqcCKdsedzm1tHGv",
+  "rock-songs": "7DgPQwzEoUVfQYBiMLER9Z",
   "movies-shows-musicals": "4hnvhxHyMHrtaylZgMypE1",
   "ed-sheeran": "37i9dQZF1DWWxPM4nWdhyI",
   "olivia-rodrigo": "37i9dQZF1DXaohnPXGkLv6",
-  "justin-bieber": "37i9dQZF1DXc2aPBXGmXrt",
+  "one-direction": "6vHhQOHGABPPMcLumvTBpN",
   "taylor-swift": "37i9dQZF1DX5KpP2LN299J",
+};
+
+const createTable = async () => {
+  const query = `
+    CREATE TABLE IF NOT EXISTS melodyquest (
+      id SERIAL PRIMARY KEY,
+      playlist_name VARCHAR(255) NOT NULL,
+      playlist_uri VARCHAR(255) NOT NULL,
+      primary_artist VARCHAR(255) NOT NULL,
+      track_name VARCHAR(255) NOT NULL,
+      track_uri VARCHAR(255) NOT NULL
+    );
+  `;
+  try {
+    await pool.query(query);
+    console.log('Table melodyquest is ready.');
+  } catch (error) {
+    console.error('Error creating melodyquest table:', error);
+  }
+};
+
+const createScoresTable = async () => {
+  const query = `
+    CREATE TABLE IF NOT EXISTS scores (
+      id SERIAL PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      score INTEGER NOT NULL
+    );
+  `;
+  try {
+    await pool.query(query);
+    console.log('Table scores is ready.');
+  } catch (error) {
+    console.error('Error creating scores table:', error);
+  }
 };
 
 //Fetches tracks from a Spotify playlist and stores them in the database.
@@ -53,6 +88,8 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 //Seeds the database with songs from the specified playlists.
 const seedDatabase = async () => {
+  await createTable();
+  await createScoresTable(); 
   for (let playlist in playlists) {
     await fetchAndStoreSongs(playlist, playlists[playlist]);
     await delay(delayInMillis); 
