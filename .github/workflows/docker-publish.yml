@@ -32,8 +32,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            your-dockerhub-username/root-image-repo:latest
-            your-dockerhub-username/root-image-repo:${{ github.sha }}
+            romansth/melodyquest-frontend:latest
+            romansth/melodyquest-frontend:${{ github.sha }}
 
       - name: Build and push Docker image from server directory
         uses: docker/build-push-action@v4
@@ -42,8 +42,8 @@ jobs:
           file: ./server/Dockerfile
           push: true
           tags: |
-            your-dockerhub-username/server-image-repo:latest
-            your-dockerhub-username/server-image-repo:${{ github.sha }}
+            romansth/melodyquest-backend:latest
+            romansth/melodyquest-backend:${{ github.sha }}
 
       - name: Post Docker Hub logout
         run: docker logout
