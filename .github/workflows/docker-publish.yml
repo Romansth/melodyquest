@@ -77,6 +77,7 @@ jobs:
               -e REACT_APP_SERVER_URL=${{ secrets.REACT_APP_SERVER_URL }} \
               -e CLIENT_URL=${{ secrets.CLIENT_URL }} \
               -e LYRICS_API_KEY=${{ secrets.LYRICS_API_KEY }} \
+              -e WDS_SOCKET_PORT=${{ secrets.WDS_SOCKET_PORT }} \
               romansth/melodyquest-backend:latest
 
             sudo docker pull romansth/melodyquest-frontend:latest
@@ -96,6 +97,7 @@ jobs:
               -e REACT_APP_SERVER_URL=${{ secrets.REACT_APP_SERVER_URL }} \
               -e CLIENT_URL=${{ secrets.CLIENT_URL }} \
               -e LYRICS_API_KEY=${{ secrets.LYRICS_API_KEY }} \
+              -e WDS_SOCKET_PORT=${{ secrets.WDS_SOCKET_PORT }} \
               romansth/melodyquest-frontend:latest
             
             # Install NGINX and Certbot
