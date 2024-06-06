@@ -61,9 +61,9 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             sudo docker pull romansth/melodyquest-backend:latest
-            sudo docker stop backend-container || true
-            sudo docker rm backend-container || true
-            sudo docker run -d --name backend-container -p 8004:8004 \
+            sudo docker stop romansth/melodyquest-backend:latest || true
+            sudo docker rm romansth/melodyquest-backend:latest || true
+            sudo docker run -d --name romansth/melodyquest-backend:latest -p 8004:8004 \
               -e SPOTIFY_CLIENT_ID=${{ secrets.SPOTIFY_CLIENT_ID }} \
               -e SPOTIFY_CLIENT_SECRET=${{ secrets.SPOTIFY_CLIENT_SECRET }} \
               -e SPOTIFY_TOKEN=${{ secrets.SPOTIFY_TOKEN }} \
@@ -80,9 +80,9 @@ jobs:
               romansth/melodyquest-backend:latest
 
             sudo docker pull romansth/melodyquest-frontend:latest
-            sudo docker stop frontend-container || true
-            sudo docker rm frontend-container || true
-            sudo docker run -d --name frontend-container -p 3052:3052 \
+            sudo docker stop romansth/melodyquest-frontend:latest || true
+            sudo docker rm romansth/melodyquest-frontend:latest || true
+            sudo docker run -d --name romansth/melodyquest-frontend:latest -p 3052:3052 \
               -e SPOTIFY_CLIENT_ID=${{ secrets.SPOTIFY_CLIENT_ID }} \
               -e SPOTIFY_CLIENT_SECRET=${{ secrets.SPOTIFY_CLIENT_SECRET }} \
               -e SPOTIFY_TOKEN=${{ secrets.SPOTIFY_TOKEN }} \
