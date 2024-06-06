@@ -122,7 +122,7 @@ jobs:
                 include /etc/letsencrypt/options-ssl-nginx.conf;
                 ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
-                location /api {
+                location /api/ {
                     proxy_pass http://localhost:8004;
                     proxy_set_header Host $host;
                     proxy_set_header X-Real-IP $remote_addr;
