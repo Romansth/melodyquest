@@ -38,7 +38,7 @@ jobs:
       - name: Build and push Docker image from server directory
         uses: docker/build-push-action@v4
         with:
-          context: ./server
+          context: .
           file: ./server/Dockerfile
           push: true
           tags: |
