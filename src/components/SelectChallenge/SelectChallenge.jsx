@@ -49,13 +49,6 @@ const SelectChallenge = ({ onPlaylistSelect }) => {
         <div class="challenges">
           <button
             className="challenge-title"
-            id="tiktok-hits"
-            onClick={() => handleSelect("tiktok-hits")}
-          >
-            Tiktok hits
-          </button>
-          <button
-            className="challenge-title"
             id="pop-songs"
             onClick={() => handleSelect("pop-songs")}
           >
@@ -67,6 +60,13 @@ const SelectChallenge = ({ onPlaylistSelect }) => {
             onClick={() => handleSelect("indie-songs")}
           >
             Indie songs
+          </button>
+          <button
+            className="challenge-title"
+            id="rock-songs"
+            onClick={() => handleSelect("rock-songs")}
+          >
+            Rock Songs
           </button>
           <button
             className="challenge-title"
@@ -98,17 +98,17 @@ const SelectChallenge = ({ onPlaylistSelect }) => {
           </button>
           <button
             className="challenge-title"
+            id="one-direction"
+            onClick={() => handleSelect("one-direction")}
+          >
+            One Direction
+          </button>
+          <button
+            className="challenge-title"
             id="olivia-rodrigo"
             onClick={() => handleSelect("olivia-rodrigo")}
           >
             Olivia Rodrigo
-          </button>
-          <button
-            className="challenge-title"
-            id="justin-bieber"
-            onClick={() => handleSelect("justin-bieber")}
-          >
-            Justin Beiber
           </button>
         </div>
       </div>

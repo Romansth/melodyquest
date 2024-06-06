@@ -1,0 +1,28 @@
+version: '1.0'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    ports:
+      - "8004:8004"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - .env
+      - NODE_ENV=development
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3052:3052"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - .env
+      - NODE_ENV=development
