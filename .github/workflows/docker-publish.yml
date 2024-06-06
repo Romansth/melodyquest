@@ -47,3 +47,53 @@ jobs:
 
       - name: Post Docker Hub logout
         run: docker logout
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to EC2 instance
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo docker pull romansth/melodyquest-backend:latest
+            sudo docker stop backend-container || true
+            sudo docker rm backend-container || true
+            sudo docker run -d --name backend-container -p 8004:8004 \
+              -e SPOTIFY_CLIENT_ID=${{ secrets.SPOTIFY_CLIENT_ID }} \
+              -e SPOTIFY_CLIENT_SECRET=${{ secrets.SPOTIFY_CLIENT_SECRET }} \
+              -e SPOTIFY_TOKEN=${{ secrets.SPOTIFY_TOKEN }} \
+              -e DB_USER=${{ secrets.DB_USER }} \
+              -e DB_HOST=${{ secrets.DB_HOST }} \
+              -e DB_NAME=${{ secrets.DB_NAME }} \
+              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              -e DB_PORT=${{ secrets.DB_PORT }} \
+              -e SERVER_PORT=${{ secrets.SERVER_PORT }} \
+              -e SERVER_URL=${{ secrets.SERVER_URL }} \
+              -e REACT_APP_SERVER_URL=${{ secrets.REACT_APP_SERVER_URL }} \
+              -e CLIENT_URL=${{ secrets.CLIENT_URL }} \
+              -e LYRICS_API_KEY=${{ secrets.LYRICS_API_KEY }} \
+              romansth/melodyquest-backend:latest
+
+            sudo docker pull romansth/melodyquest-frontend:latest
+            sudo docker stop frontend-container || true
+            sudo docker rm frontend-container || true
+            sudo docker run -d --name frontend-container -p 3052:3052 \
+              -e SPOTIFY_CLIENT_ID=${{ secrets.SPOTIFY_CLIENT_ID }} \
+              -e SPOTIFY_CLIENT_SECRET=${{ secrets.SPOTIFY_CLIENT_SECRET }} \
+              -e SPOTIFY_TOKEN=${{ secrets.SPOTIFY_TOKEN }} \
+              -e DB_USER=${{ secrets.DB_USER }} \
+              -e DB_HOST=${{ secrets.DB_HOST }} \
+              -e DB_NAME=${{ secrets.DB_NAME }} \
+              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              -e DB_PORT=${{ secrets.DB_PORT }} \
+              -e SERVER_PORT=${{ secrets.SERVER_PORT }} \
+              -e SERVER_URL=${{ secrets.SERVER_URL }} \
+              -e REACT_APP_SERVER_URL=${{ secrets.REACT_APP_SERVER_URL }} \
+              -e CLIENT_URL=${{ secrets.CLIENT_URL }} \
+              -e LYRICS_API_KEY=${{ secrets.LYRICS_API_KEY }} \
+              romansth/melodyquest-frontend:latest
