@@ -101,12 +101,12 @@ jobs:
               romansth/melodyquest-frontend:latest
             
             # Install NGINX and Certbot
-            sudo apt-get update
-            sudo apt-get install -y nginx
-            sudo apt-get install -y certbot python3-certbot-nginx
+            # sudo apt-get update
+            # sudo apt-get install -y nginx
+            # sudo apt-get install -y certbot python3-certbot-nginx
 
             # Obtain SSL certificate
-            sudo certbot --nginx -d romansth.com -m rstha@gmail.com --agree-tos --non-interactive
+            # sudo certbot --nginx -d romansth.com -m rstha@gmail.com --agree-tos --non-interactive
 
             # NGINX configuration with SSL
             echo 'server {
