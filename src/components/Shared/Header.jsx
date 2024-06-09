@@ -21,9 +21,9 @@ const Header = () => {
             stroke="white"
           />
         </svg>
-        Melody Quest Test
+        Melody Quest Test1
       </h1>
-      <p>Guess the song challenge</p>
+      <p>Guess the song challenge test</p>
     </header>
   );
 };
