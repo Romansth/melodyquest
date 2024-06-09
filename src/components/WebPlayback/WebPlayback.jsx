@@ -184,6 +184,7 @@ const WebPlayback = ({ selectedPlaylist, token, onRestart }) => {
       setScore((prevScore) => prevScore + remainingTime);
       setTimeout(() => {
         setGuessingEnd(true);
+        player.pause();
       }, 3000);
     }
     setGuess("");
@@ -428,7 +429,7 @@ const WebPlayback = ({ selectedPlaylist, token, onRestart }) => {
           <div className="guesses-singleplayer">
             <p className="guess-title-singleplayer">Guesses Here</p>
 
-            {guesses.map((item, index) => (
+            {guesses.slice(-5).map((item, index) => (
               <p>
                 <div
                   className={item.correct ? "correct-guess" : "incorrect-guess"}

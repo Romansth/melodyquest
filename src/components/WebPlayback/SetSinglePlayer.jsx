@@ -50,6 +50,10 @@ const SetSinglePlayer = ({ onSubmit }) => {
           </svg>
         </span>
       </div>
+
+      <span className="browser-warning">Please use Chrome for single player mode. Safari doesn't support music autoplay.</span>
+      
+
       <div className="playtype-flex">
         <div className="room-input">
           <input
