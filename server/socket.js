@@ -37,7 +37,7 @@ const socketHandler = (io) => {
       }
 
       io.to(room).emit(
-        "users",
+        "scores",
         usersScores.filter((user) => user.room === room)
       );
       console.log(`User ${user.name} joined room ${user.room}`);
