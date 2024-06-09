@@ -421,9 +421,15 @@ const Multiplayer = ({ selectedPlaylist, onRestart }) => {
                 </div>
               )}
 
-              {isStarted && isInitTimerComplete && !isOver && (
+              {isStarted && isInitTimerComplete && !isOver && remainingTime > 2 && (
                 <Lyrics lyrics={lyrics} />
               )}
+
+              {isStarted && isInitTimerComplete && !isOver && remainingTime < 2 && (
+                <div className="lyrics">{multiCurrentTrack}</div>
+              )}
+
+              
             </div>
 
             <div className="guess-input">
@@ -460,7 +466,7 @@ const Multiplayer = ({ selectedPlaylist, onRestart }) => {
           <div className="guesses">
             <p className="guess-title">Guesses</p>
             {guesses.length > 0 ? (
-              guesses.map((msg, i) => (
+              guesses.slice(-5).map((msg, i) => (
                 <div
                   className={
                     msg.text === "Correct guess"

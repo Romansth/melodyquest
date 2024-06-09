@@ -87,6 +87,19 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.browser-warning {
+  background-color: #ffcc00; 
+  color: #7a83b6; 
+  font-size: 1em; 
+  padding: 10px;
+  border: 1px solid #7a83b6; 
+  border-radius: 5px; 
+  display: inline-block; 
+  margin-top: 10px; 
+  text-align: center; 
+}
+
+
 @media (max-width: 768px) {
   .content {
     flex-direction: column;

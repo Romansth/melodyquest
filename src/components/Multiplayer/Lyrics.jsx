@@ -16,11 +16,11 @@ const LyricsFetcher = ({ lyrics }) => {
 
   // Effect to update the current and next lines based on processed lines
   useEffect(() => {
-    if (lines.length >= 3) {
+    if (lines.length >= 4) {
       setCurrentLine(`${lines[0]}\n${lines[1]}`);
       setNextLine("");
       const timer = setTimeout(() => {
-        setNextLine(lines[2]);
+        setNextLine(`${lines[2]}\n${lines[3]}`);
       }, 10000);
 
       return () => clearTimeout(timer);

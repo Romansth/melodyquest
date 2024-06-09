@@ -119,7 +119,7 @@ app.post("/api/add-score", async (req, res) => {
 app.get("/api/top-scores", async (req, res) => {
   try {
     const topScores = await pool.query(
-      "SELECT * FROM scores ORDER BY score DESC LIMIT 10"
+      "SELECT * FROM scores ORDER BY score DESC LIMIT 5"
     );
     res.json(topScores.rows);
   } catch (error) {

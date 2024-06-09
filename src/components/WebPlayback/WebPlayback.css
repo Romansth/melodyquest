@@ -48,6 +48,21 @@
   font-weight: bold;
 }
 
+.superscript-svg-singleplayer {
+  display: flex;
+  align-items: flex-start;
+  font-size: 12px;
+}
+
+.superscript-svg-singleplayer svg {
+  margin-right: 2px;
+  height: 30px;
+}
+
+.remaining-text-singleplayer {
+  margin-left: 2px;
+}
+
 .lyrics-section-singleplayer {
   display: flex;
   flex-direction: column;
@@ -65,21 +80,7 @@
   font-size: 2em;
   margin-bottom: 20px;
   padding: 5px;
-}
-
-.superscript-svg-singleplayer {
-  display: flex;
-  align-items: flex-start;
-  font-size: 12px;
-}
-
-.superscript-svg-singleplayer svg {
-  margin-right: 2px;
-  height: 30px;
-}
-
-.remaining-text-singleplayer {
-  margin-left: 2px;
+  height: 5vh;
 }
 
 .countdown-timer-singleplayer {
@@ -122,13 +123,17 @@
   animation: spin 2s linear infinite;
 }
 
+.vinyl-singleplayer svg {
+  height: 65vh;
+}
+
 .guess-input-singleplayer {
   background-color: #7a83b6;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  padding: 20px;
+  padding: 13px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

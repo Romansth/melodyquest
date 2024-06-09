@@ -108,6 +108,10 @@
   animation: spin 2s linear infinite;
 }
 
+.login-vinyl svg{
+  height: 65vh;
+}
+
 @media (max-width: 500px) {
   .content {
     flex-direction: column;
