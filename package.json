@@ -27,7 +27,9 @@
     "start": "PORT=3052 react-scripts start",
     "build": "react-scripts build",
     "server": "node server/server.js",
-    "dev": "run-p server start"
+    "dev": "run-p server start",
+    "test": "jest"
+    
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +50,11 @@
     ]
   },
   "devDependencies": {
-    "npm-run-all": "^4.1.5"
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "babel-jest": "^29.7.0",
+    "jest": "^27.5.1",
+    "npm-run-all": "^4.1.5",
+    "supertest": "^7.0.0"
   }
 }

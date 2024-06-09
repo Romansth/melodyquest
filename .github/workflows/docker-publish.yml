@@ -16,6 +16,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Jest tests
+        run: npm test
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -77,6 +88,7 @@ jobs:
               -e REACT_APP_SERVER_URL=${{ secrets.REACT_APP_SERVER_URL }} \
               -e CLIENT_URL=${{ secrets.CLIENT_URL }} \
               -e LYRICS_API_KEY=${{ secrets.LYRICS_API_KEY }} \
+              -e WDS_SOCKET_PORT=${{ secrets.WDS_SOCKET_PORT }} \
               romansth/melodyquest-backend:latest
 
             sudo docker pull romansth/melodyquest-frontend:latest
@@ -96,15 +108,16 @@ jobs:
               -e REACT_APP_SERVER_URL=${{ secrets.REACT_APP_SERVER_URL }} \
               -e CLIENT_URL=${{ secrets.CLIENT_URL }} \
               -e LYRICS_API_KEY=${{ secrets.LYRICS_API_KEY }} \
+              -e WDS_SOCKET_PORT=${{ secrets.WDS_SOCKET_PORT }} \
               romansth/melodyquest-frontend:latest
             
             # Install NGINX and Certbot
-            sudo apt-get update
-            sudo apt-get install -y nginx
-            sudo apt-get install -y certbot python3-certbot-nginx
+            # sudo apt-get update
+            # sudo apt-get install -y nginx
+            # sudo apt-get install -y certbot python3-certbot-nginx
 
             # Obtain SSL certificate
-            sudo certbot --nginx -d romansth.com -m rstha@gmail.com --agree-tos --non-interactive
+            # sudo certbot --nginx -d romansth.com -m rstha@gmail.com --agree-tos --non-interactive
 
             # NGINX configuration with SSL
             echo 'server {
@@ -137,6 +150,18 @@ jobs:
                     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                     proxy_set_header X-Forwarded-Proto $scheme;
                 }
+
+                location /ws/ {
+                    proxy_pass http://localhost:3052/ws/;
+                    proxy_http_version 1.1;
+                    proxy_set_header Upgrade $http_upgrade;
+                    proxy_set_header Connection "Upgrade";
+                    proxy_set_header Host $host;
+                    proxy_set_header X-Real-IP $remote_addr;
+                    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                    proxy_set_header X-Forwarded-Proto $scheme;
+                }
+
             }' | sudo tee /etc/nginx/sites-available/default
 
             sudo systemctl restart nginx
