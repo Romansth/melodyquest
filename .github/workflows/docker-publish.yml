@@ -64,104 +64,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to EC2 instance
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            sudo docker pull romansth/melodyquest-backend:latest
-            sudo docker stop backend-container || true
-            sudo docker rm backend-container || true
-            sudo docker run -d --name backend-container -p 8004:8004 \
-              -e SPOTIFY_CLIENT_ID=${{ secrets.SPOTIFY_CLIENT_ID }} \
-              -e SPOTIFY_CLIENT_SECRET=${{ secrets.SPOTIFY_CLIENT_SECRET }} \
-              -e SPOTIFY_TOKEN=${{ secrets.SPOTIFY_TOKEN }} \
-              -e DB_USER=${{ secrets.DB_USER }} \
-              -e DB_HOST=${{ secrets.DB_HOST }} \
-              -e DB_NAME=${{ secrets.DB_NAME }} \
-              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
-              -e DB_PORT=${{ secrets.DB_PORT }} \
-              -e SERVER_PORT=${{ secrets.SERVER_PORT }} \
-              -e SERVER_URL=${{ secrets.SERVER_URL }} \
-              -e REACT_APP_SERVER_URL=${{ secrets.REACT_APP_SERVER_URL }} \
-              -e CLIENT_URL=${{ secrets.CLIENT_URL }} \
-              -e LYRICS_API_KEY=${{ secrets.LYRICS_API_KEY }} \
-              -e WDS_SOCKET_PORT=${{ secrets.WDS_SOCKET_PORT }} \
-              romansth/melodyquest-backend:latest
-
-            sudo docker pull romansth/melodyquest-frontend:latest
-            sudo docker stop frontend-container || true
-            sudo docker rm frontend-container || true
-            sudo docker run -d --name frontend-container -p 3052:3052 \
-              -e SPOTIFY_CLIENT_ID=${{ secrets.SPOTIFY_CLIENT_ID }} \
-              -e SPOTIFY_CLIENT_SECRET=${{ secrets.SPOTIFY_CLIENT_SECRET }} \
-              -e SPOTIFY_TOKEN=${{ secrets.SPOTIFY_TOKEN }} \
-              -e DB_USER=${{ secrets.DB_USER }} \
-              -e DB_HOST=${{ secrets.DB_HOST }} \
-              -e DB_NAME=${{ secrets.DB_NAME }} \
-              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
-              -e DB_PORT=${{ secrets.DB_PORT }} \
-              -e SERVER_PORT=${{ secrets.SERVER_PORT }} \
-              -e SERVER_URL=${{ secrets.SERVER_URL }} \
-              -e REACT_APP_SERVER_URL=${{ secrets.REACT_APP_SERVER_URL }} \
-              -e CLIENT_URL=${{ secrets.CLIENT_URL }} \
-              -e LYRICS_API_KEY=${{ secrets.LYRICS_API_KEY }} \
-              -e WDS_SOCKET_PORT=${{ secrets.WDS_SOCKET_PORT }} \
-              romansth/melodyquest-frontend:latest
-            
-            # Install NGINX and Certbot
-            # sudo apt-get update
-            # sudo apt-get install -y nginx
-            # sudo apt-get install -y certbot python3-certbot-nginx
-
-            # Obtain SSL certificate
-            # sudo certbot --nginx -d romansth.com -m rstha@gmail.com --agree-tos --non-interactive
-
-            # NGINX configuration with SSL
-            echo 'server {
-                listen 80;
-                server_name romansth.com;
-                return 301 https://$host$request_uri;
-            }
-
-            server {
-                listen 443 ssl;
-                server_name romansth.com;
-
-                ssl_certificate /etc/letsencrypt/live/romansth.com/fullchain.pem;
-                ssl_certificate_key /etc/letsencrypt/live/romansth.com/privkey.pem;
-                include /etc/letsencrypt/options-ssl-nginx.conf;
-                ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
-
-                location /api/ {
-                    proxy_pass http://localhost:8004/;
-                    proxy_set_header Host $host;
-                    proxy_set_header X-Real-IP $remote_addr;
-                    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                    proxy_set_header X-Forwarded-Proto $scheme;
-                }
-
-                location / {
-                    proxy_pass http://localhost:3052;
-                    proxy_set_header Host $host;
-                    proxy_set_header X-Real-IP $remote_addr;
-                    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                    proxy_set_header X-Forwarded-Proto $scheme;
-                }
-
-                location /ws/ {
-                    proxy_pass http://localhost:3052/ws/;
-                    proxy_http_version 1.1;
-                    proxy_set_header Upgrade $http_upgrade;
-                    proxy_set_header Connection "Upgrade";
-                    proxy_set_header Host $host;
-                    proxy_set_header X-Real-IP $remote_addr;
-                    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                    proxy_set_header X-Forwarded-Proto $scheme;
-                }
-
-            }' | sudo tee /etc/nginx/sites-available/default
-
-            sudo systemctl restart nginx
+      - name: Deploy to Render
+        run: |
+          curl -X POST \
+            -H "Accept: application/json" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{"clearCache":true}' \
+            https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys
