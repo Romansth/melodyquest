@@ -64,6 +64,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to Render using deploy hook
+      - name: Deploy frontend to Render using deploy hook
         run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          curl -X POST ${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK_URL }}
+
+      - name: Deploy backend to Render using deploy hook
+        run: |
+          curl -X POST ${{ secrets.RENDER_BACKEND_DEPLOY_HOOK_URL }}
