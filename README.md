@@ -12,7 +12,7 @@ Live Website: www.melodyquest.app
 DockerHub: [Frontend](https://hub.docker.com/repository/docker/romansth/melodyquest-frontend) [Backend](https://hub.docker.com/repository/docker/romansth/melodyquest-backend)
 
 ## Screenshots
- <img src="https://media.discordapp.net/attachments/683899874034319360/1249806221393789008/Screenshot_2024-06-09_at_4.44.07_PM.png?ex=6668a43f&is=666752bf&hm=48aa91909b86b27a31757307a321532fd1e77c4b7617915864ea8081630d0192&=&width=1964&height=1124" height=200><img src ="https://media.discordapp.net/attachments/683899874034319360/1249806158626029598/Screenshot_2024-06-09_at_5.22.39_PM.png?ex=6668a430&is=666752b0&hm=66f3158a147d445f5ebbac0901904ecc127ea97c167836844208709b7291b0a3&=&width=1988&height=1124" height=200>
+ <img src="https://media.discordapp.net/attachments/683899874034319360/1249806221393789008/Screenshot_2024-06-09_at_4.44.07_PM.png?ex=6668a43f&is=666752bf&hm=48aa91909b86b27a31757307a321532fd1e77c4b7617915864ea8081630d0192&=&width=1964&height=1124" height=230><img src ="https://media.discordapp.net/attachments/683899874034319360/1249806158626029598/Screenshot_2024-06-09_at_5.22.39_PM.png?ex=6668a430&is=666752b0&hm=66f3158a147d445f5ebbac0901904ecc127ea97c167836844208709b7291b0a3&=&width=1988&height=1124" height=230>
 
 ## Getting Started
 
